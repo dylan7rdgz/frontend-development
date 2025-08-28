@@ -1,0 +1,149 @@
+@font-face {
+    font-family: norse-bold;
+    src: url("/Users/Dylan/Downloads/Norse-Bold.otf");
+}
+
+.left-part {
+    width: 30%;
+    height: 100%;
+    background-color: aqua;
+}
+
+.middle-banner {
+    position: absolute;
+    background-color: #0000002b;
+    top: 25%;
+    width: 29.6%;
+    height: 10%;
+    text-align: center;
+  }
+
+  .background-image {
+    height: 100%;
+    width: 100%;
+  }
+
+.middle-banner-font {
+    font-size: 10%;
+}
+
+.right-part {
+    /* background-color: blue;*/
+    height: 100%;
+    width: 68%;
+    position: absolute;
+    left: 31%;
+    /* top: 2.75%;*/
+    top: -2.25%; /* Rotten fix for avoiding the space between the right-part and right-part-up*/
+}
+
+.right-part-up {
+    height: 34%;
+    background-color: rgba(240, 233, 233, 0.84);
+  }
+
+.right-part-mid {
+    height: 70%;
+    background-color: rgb(243, 241, 235);
+    overflow: scroll;
+  }
+
+/* .right-part-down {
+    height: 21%;
+    background-color: green;
+} */
+
+.right-part-down-para {
+    position: relative;
+    left: 28%;
+    top:12%;  
+}
+
+.right-part-mid-para {
+    position: relative;
+    left: 28%;
+    top: 2%;
+}
+
+input:invalid {
+    border-color: red;
+}
+  
+input:valid {
+    border-color: green;
+}
+
+/* form {
+    padding: 1em;
+    border: 1px solid #cccccc;
+    border-radius: 1em;
+} */
+
+/* p + p {
+    margin-top: 1em;
+}
+
+
+*/
+
+/* input {
+  // To make sure that all text fields have the same font settings
+     // By default, text areas have a monospace font
+  font: 1em sans-serif;
+  // Uniform text field size
+  width: 300px;
+  box-sizing: border-box;
+  // Match form field borders
+  border: 1px solid #999999;
+} */
+
+
+
+
+input {
+    font-size: 100%;
+    margin-right: 15%;
+    margin-right: 0px;
+    box-sizing: border-box;
+    width: 25%;
+    padding: 5px;
+    height: 23px;
+    margin-right: 2%;
+    border-width: 0.5px;
+    border-radius: 3px;
+  }
+
+label:nth-child(2) {
+    position: absolute;
+    left: 217;
+} 
+
+
+
+button {
+    margin-top: 4%;
+    background-color: green;
+    border-radius: 9px;
+    padding: 1%;
+    padding-right: 1%;
+    padding-left: 1%;
+    padding-left: 29px;
+    padding-right: 29px;
+  }
+
+
+.product-font {
+    font-family: norse-bold, sans-serif;
+    font-size: 40;
+    color: white;
+    position: relative;
+    bottom: 83px;
+    left: 25px;
+}
+
+.product-img {
+    height: 46px;
+    width: 42px;
+    position: relative;
+    right: 29px;
+  }

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: sans-serif;
+    }
+
+    /* Left column */
+    .left-part {
+      float: left;
+      width: 30%;
+      height: 100vh;
+      position: relative;
+    }
+
+    .background-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .middle-banner {
+      background: rgba(0,0,0,0.4);
+      color: white;
+      text-align: center;
+      padding: 1em;
+      position: absolute;
+      top: 25%;
+      width: 100%;
+    }
+
+    /* Right column */
+    .right-part {
+      float: left;
+      width: 70%;
+      height: 100vh;
+      background: #f3f1eb;
+      overflow-y: auto;
+      box-sizing: border-box;
+      padding: 2em;
+    }
+
+    .right-part section {
+      margin-bottom: 2em;
+    }
+
+    /* Form layout */
+    form {
+      margin-top: 1em;
+    }
+
+    .form-row {
+      margin-bottom: 1em;
+    }
+
+    .form-field {
+      display: inline-block;
+      width: 48%;       /* two side-by-side fields */
+      vertical-align: top;
+    }
+
+    .form-field label {
+      display: block;   /* label above input */
+      margin-bottom: .3em;
+    }
+
+    .form-field input {
+      width: 95%;
+      padding: .5em;
+      border: 1px solid #999;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: .7em 1.5em;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: darkgreen;
+    }
+  </style>
+</head>
+<body>
+  <div class="left-part">
+    <img class="background-image" src="file:///Users/Dylan/Downloads/halie-west-25xggax4bSA-unsplash.jpg" alt="Background">
+    <div class="middle-banner">
+      <img src="https://cdn.statically.io/gh/TheOdinProject/curriculum/5f37d43908ef92499e95a9b90fc3cc291a95014c/html_css/project-sign-up-form/odin-lined.png" 
+           alt="Odin Logo" style="height:50px;">
+      <p style="font-family: norse-bold, sans-serif; font-size: 2rem;">Odin</p>
+    </div>
+  </div>
+
+  <div class="right-part">
+    <section>
+      <p>This is not a real online service! You need something like this in your life to help you realize your deepest dreams. Sign up now to get started!</p>
+      <p>You know you want to!</p>
+    </section>
+
+    <section>
+      <h2>Let's do this!</h2>
+      <form action="" method="POST">
+        
+        <div class="form-row">
+          <div class="form-field">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name">
+          </div>
+          <div class="form-field">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+          </div>
+          <div class="form-field">
+            <label for="phone_no">Phone No</label>
+            <input type="tel" id="phone_no" name="phone_no">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+          </div>
+          <div class="form-field">
+            <label for="password_match">Confirm Password</label>
+            <input type="password" id="password_match" name="password_match">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <button type="submit">Create Account</button>
+        </div>
+
+      </form>
+      <p>Already have an account? <a href="#">Log in</a></p>
+    </section>
+  </div>
+</body>
+</html>
