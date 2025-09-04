@@ -1,0 +1,192 @@
+body {
+    font-size: 16px;
+}
+
+/* h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    font-weight: inherit;
+  } */
+
+.margin-align {
+    margin-left: 4.5em;
+    margin-right: 4.5em;
+}
+
+.app-nav {
+    display: flex;
+}
+
+.app-nav .app-nav-left {
+    flex: 1;
+} 
+
+.app-nav .app-nav-links {
+    flex: 1;
+    display: flex;
+}
+
+.app-nav .app-nav-links div {
+    flex: 1
+}
+
+.app-intro {
+    display: flex;
+}
+
+.app-desc {
+    flex: 1;
+}
+
+.app-desc-title {
+    margin: 0.25em 0em;
+}
+
+.app-desc-info {
+    font-size: 0.625em;
+    font-weight: lighter;
+    margin: 0.25em 0em;
+}
+
+.app-sign-up {
+    margin: 0.5em 0em;
+    background-color: aqua;
+    color: white;
+    border-radius: 4px;
+}
+
+.app-img-ph {
+    flex: 1;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    display: flex;
+}
+
+.app-img-bg {
+    height: 9em;
+    width: 21em;
+    align-content: center;
+    font-size: 0.75em;
+    background-color: #868B95;
+  }
+
+.section-1 {
+    background-color: #092955;
+    color: white;
+    height: 13.5em;
+}
+
+.section-2 {
+    height: 12em;
+}
+
+.section-3 {
+    background-color: #868B95;
+    height: 12em;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.motivational-text {
+    text-align: center;
+}
+
+.app-features {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.app-feature {
+    height: 60px;
+    width: 60px;
+    border: solid 2px #092955;
+    border-radius: 4px;
+}
+
+
+.app-features-info {
+    height: 60px;
+    display: flex;
+    gap: 34px;
+    justify-content: center;
+  }
+
+.no-margin-h4 {
+    margin: 0px;
+}
+
+.no-margin-h4 {
+    margin: 0px;
+    align-content: center;
+    text-align: center;
+    height: 55px;
+  }
+
+.app-features-info {
+    height: 60px;
+    display: flex;
+    gap: 34px;
+    justify-content: center;
+    margin-top: 6px;
+  }
+
+.feature-info {
+    font-size: 5px;
+    color: black;
+}
+
+.motivational-text-by {
+    text-align: right;
+    left: 35em;
+    right: 64em;
+    margin-left: 30em;
+    margin-right: 30em;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.call-to-action  {
+    height: 6em;
+    width: 34em;
+    margin-left: 20em;
+    margin-right: 20em;
+    margin-top: 2em;
+    background-color: blue;
+    display: flex;
+    gap: 4em;
+    align-content: center;
+}
+
+.call-to-action-text {
+    margin: auto;
+    color: white;
+    font-weight: 200;
+}
+
+.button-type-1 {
+    height: 2em;
+    width: 6em;
+    align-items: center;
+    margin: auto;
+    background-color: blue;
+    border: 0.5px solid white;
+    color: white;
+    border-radius: 4px;
+    font-size: 10px;
+}
+
+.landing-page-footer {
+    margin-top: 2em;
+    background-color: #092955;
+    height: 3em;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    font-weight: 100;
+}
