@@ -86,7 +86,6 @@ function playRound(humanChoice, computerChoice) {
 
 // playRound(humanResult, computerResult)
 
-
 function playGame() {
     // reset scores before starting
     humanScore = 0;
