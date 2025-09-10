@@ -1,0 +1,21 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    width: 5em;
+    margin: 2em 32em;
+}
+
+.sub-container {
+    display: flex;
+    flex-direction: row;
+}
+
+#output {
+    border: 1px solid blue;
+    flex: 1;
+}
+
+.square {
+    height: 2em;
+    width: 2em;
+}
