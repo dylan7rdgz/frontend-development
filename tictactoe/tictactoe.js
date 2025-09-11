@@ -1,18 +1,20 @@
 function Gameboard() {
-    this.gameboard = [
+    const gameboard = [
         [null, null, null],
         [null, null, null],
         [null, null, null]
     ];
-    this.markBoard = (char, i, j) => this.gameboard[i][j] = char;
-    this.resetBoard = function() {
-        for(let i=0; i<this.gameboard.length; i++) {
-            for(let j=0; j<this.gameboard.length[0]; j++) {
-                this.gameboard[i][j] = null;
+    const markBoard = (char, i, j) => {
+        gameboard[i][j] = char;
+    }
+    const resetBoard = function () {
+        for (let i = 0; i < gameboard.length; i++) {
+            for (let j = 0; j < gameboard[i].length; j++) {
+                gameboard[i][j] = null;
             }
         }
     };
-    this.getWinner = function getWinner(board) {
+    const getWinner = function getWinner(board) {
         const size = board.length; // 3 for a 3x3 board
         // Check rows
         for (let i = 0; i < size; i++) {
@@ -35,48 +37,119 @@ function Gameboard() {
         }
         return null; // No winner yet
     }
+
+    function displayGameBoard(gameboard, gameObj) {
+        const gameboardContainer = document.createElement("div");
+        gameboardContainer.style.marginRight = "32em";
+        gameboardContainer.style.marginLeft = "32em";
+        for (let i = 0; i < gameboard.length; i++) {
+            const gameboardRowContainer = document.createElement("div");
+            gameboardRowContainer.style.display = "flex";
+            for (let j = 0; j < gameboard[i].length; j++) {
+                const cell = document.createElement("button");
+                const playGame = gameObj.playGame;
+                cell.addEventListener("click", (event) => {
+                    console.log(event);
+                    playGame(event)
+                })
+                cell.textContent = "";
+                cell.style.border = "1px solid black";
+                cell.style.height = "2em";
+                cell.style.width = "2em";
+                cell.id = `${i}${j}`
+                gameboardRowContainer.append(cell);
+            }
+            gameboardContainer.append(gameboardRowContainer);
+        }
+        const body = document.querySelector("body")
+        body.appendChild(gameboardContainer);
+    }
+
+    return { gameboard, markBoard, resetBoard, getWinner, displayGameBoard }
 }
 
 function Player() {
-    this.symbol = null;   
+    const symbol = null;
+    const name = null;
+    return { symbol }
 }
 
 
 function Game() {
-    this.togglePlayer = function (prevPlayerSymbol) {
+    const togglePlayer = function (prevPlayerSymbol) {
         if (prevPlayerSymbol === 'X') {
             prevPlayerSymbol = '0';
         } else {
             prevPlayerSymbol = 'X';
         }
+        return prevPlayerSymbol;
     };
-    this.game = function () {
-        const playerA = new Player();
-        playerA.playerSymbol = 'X';
-        const gameboardObj = new Gameboard();
-        gameboardObj.resetBoard();
-        const gameboard = gameboardObj.gameboard;
-        console.log("gameboard: ", gameboard);
-        // const playerB = new Player();
-        // playerB.playerSymbol = '0';
-        //! let prevPlayerSymbol = '0';
-        let symbol;
-        while (!gameboardObj.getWinner(gameboard)) {
-            //! prevPlayerSymbol = togglePlayer(prevPlayerSymbol);
-            const input = prompt("Enter a Symbol, the i value & the j value");
-            console.log(input);
-            [symbol, i, j] = input.split(" ");
-            console.log({symbol, i, j});
-            gameboardObj.markBoard(symbol, i, j);
-            console.log("gameboard: ", gameboard);
+    const togglePlayerV2 = function(currentPlayer) {
+        if (currentPlayer === playerA) {
+            return playerB;
         }
-        if (symbol === 'X') {
-            console.log("Player A wins");
-        } else {
-            console.log("Player B wins");
-        }
+        return playerA;
     }
+    const toggleSymbol = function(symbol) {
+        if (symbol === "X") {
+            return "0"
+        } 
+        return "X";
+    }
+    const playerA = Player();
+    playerA.symbol = 'X';
+    playerA.name = 'A';
+    const playerB = Player();
+    playerB.symbol = '0';
+    playerB.name = 'B';
+    this.currentSymbol = 'X';
+    const gameboardObj = Gameboard();
+    // const game = function () {
+    //     const gameboardObj = Gameboard();
+    //     gameboardObj.resetBoard();
+    //     const gameboard = gameboardObj.gameboard;
+    //     console.log("gameboard: ", gameboard);
+    //     let currentPlayer = playerA;
+    //     while (!gameboardObj.getWinner(gameboard)) {
+    //         const input = prompt("Enter the i value & the j value of the Symbol.");
+    //         const symbol = currentPlayer.symbol;
+    //         console.log(input);
+    //         [i, j] = input.split(" ");
+    //         console.log({ i, j });
+    //         // gameboardObj.markBoard(symbol, parseInt(i, 10), parseInt(j, 10));
+    //         const cellLocation = document.querySelector(`${i, j}`)
+    //         cellLocation.textContent = symbol;
+    //         console.log("gameboard: ", gameboard);
+    //         currentPlayer = togglePlayerV2(currentPlayer);
+    //     }
+    //     console.log(`${currentPlayer} is the winner`);
+    // }
+    const playGame = function(event) {
+        console.log("->", event);
+        const [i, j] = event.target.id.split("");
+        console.log({ eventId: event.target.id });
+        
+        console.log({gameboardObj})
+        const winner = gameboardObj.getWinner(gameboardObj.gameboard);
+        console.log({winner});
+        if (winner) {
+            console.log("winner: ", winner)
+        }
+        event.target.textContent = currentSymbol;
+        console.log({i, j})
+        gameboardObj.markBoard(currentSymbol, parseInt(i, 10), parseInt(j, 10));
+        currentSymbol = toggleSymbol(currentSymbol);
+    }
+    return { togglePlayer, playGame };
 }
 
-const gameObj = new Game();
-gameObj.game();
+
+const gameObj = Game();
+
+const gameboard = Gameboard();
+
+gameboard.displayGameBoard(gameboard.gameboard, gameObj);
+
+
+// gameObj.game();
+
