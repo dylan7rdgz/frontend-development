@@ -38,7 +38,7 @@ function Gameboard() {
         return null; // No winner yet
     }
 
-    function displayGameBoard(gameboard, gameObj) {
+    function displayGameBoard(gameboard, ) {
         const gameboardContainer = document.createElement("div");
         gameboardContainer.style.marginRight = "32em";
         gameboardContainer.style.marginLeft = "32em";
@@ -68,10 +68,28 @@ function Gameboard() {
     return { gameboard, markBoard, resetBoard, getWinner, displayGameBoard }
 }
 
+function Players() {
+    const players = [];
+    const getPlayers = function() {
+        return players;
+    }
+    const setPlayer = function(player) {
+        debugger;
+        players.push(player)
+    }
+    return { getPlayers, setPlayer, players }
+}
+
 function Player() {
     const symbol = null;
-    const name = null;
-    return { symbol }
+    let names = null;
+    const setPlayerName = function(playerName) {
+        names = playerName;
+    }
+    const getPlayerNames = function() {
+        return names;   
+    }
+    return { symbol, setPlayerName, getPlayerNames }
 }
 
 
@@ -96,12 +114,6 @@ function Game() {
         } 
         return "X";
     }
-    const playerA = Player();
-    playerA.symbol = 'X';
-    playerA.name = 'A';
-    const playerB = Player();
-    playerB.symbol = '0';
-    playerB.name = 'B';
     this.currentSymbol = 'X';
     const gameboardObj = Gameboard();
     // const game = function () {
@@ -130,15 +142,22 @@ function Game() {
         console.log({ eventId: event.target.id });
         
         console.log({gameboardObj})
+    
+        event.target.textContent = this.currentSymbol;
+        console.log({i, j})
+        gameboardObj.markBoard(currentSymbol, parseInt(i, 10), parseInt(j, 10));
+        console.log({event});
+        event.srcElement.disabled = true;
         const winner = gameboardObj.getWinner(gameboardObj.gameboard);
         console.log({winner});
+        const playersObj = Players();
+        const players = playersObj.getPlayers()
+        console.log({players})
         if (winner) {
             console.log("winner: ", winner)
         }
-        event.target.textContent = currentSymbol;
-        console.log({i, j})
-        gameboardObj.markBoard(currentSymbol, parseInt(i, 10), parseInt(j, 10));
         currentSymbol = toggleSymbol(currentSymbol);
+
     }
     return { togglePlayer, playGame };
 }
@@ -149,6 +168,44 @@ const gameObj = Game();
 const gameboard = Gameboard();
 
 gameboard.displayGameBoard(gameboard.gameboard, gameObj);
+
+const addPlayerNamesButton = document.querySelector("#add-player-names");
+const addPlayerDialog = document.querySelector("#add-player-dialog");
+const submitPlayer = document.querySelector("#submit-player");
+
+addPlayerNamesButton.addEventListener("click", () => {
+  addPlayerDialog.showModal();
+});
+
+submitPlayer.addEventListener("click", (event) => {
+    console.log(event.target);
+    event.preventDefault(); // Prevent default form submission
+    const form = document.querySelector('#add-player-form');
+    console.log({ form })
+    // const formData = new FormData(form);
+    // for (let [key, value] of formData.entries()) {
+    //     console.log(`${key}: ${value}`);
+    // }
+    const playerAName = document.getElementById('player-a').value;
+    const playerBName = document.getElementById('player-b').value;
+    console.log('Name:', playerAName);
+    console.log('Email:', playerBName);
+    const players = Players();
+    const playerA = Player();
+    // playerA.name = playerAName;
+    playerA.setPlayerName(playerAName);
+    playerA.symbol = "X";
+    const playerB = Player();
+    // playerB.name = playerBName;
+    playerB.setPlayerName(playerBName);
+    playerB.symbol = "0";
+    debugger;
+    players.setPlayer(playerA);
+    players.setPlayer(playerB);
+    console.log({players})
+    addPlayerDialog.close();
+})
+
 
 
 // gameObj.game();
