@@ -1,6 +1,7 @@
 export default function MenuButton() {
     const appNavMain = document.getElementById("app-nav-main");
     const MenuButton = document.createElement("button");
+    MenuButton.id = "menu-button"
     MenuButton.textContent = "Menu"
     MenuButton.style.height = "4em";
     MenuButton.style.width = "8em";
