@@ -1,18 +1,22 @@
 import MeetUpForm from "./MeetUpForm";
 import ScheduleMeetupButton from "./ScheduleMeetUpButton";
 import ProjectDialog from "./ProjectDialog";
-import getProjectList from "./getProjectList";
 import EditDialog from "./EditDialog";
+import TodoData from "./TodoData";
+import generateList from "./generateList";
 
 export default function PageLoad() {
     const container = document.getElementById("container");
-    const scheduleMeetupButton = ScheduleMeetupButton();
     const meetUpSection = document.getElementById("meet-up-section");
 
     const projectContainer = document.createElement("div");
-    const projectList = getProjectList();
+    const { getAllProjects } = TodoData();
+    const projects = getAllProjects();
+    const projectNames = projects.map(project => project.name);
+    const projectList = generateList(projectNames);
     projectContainer.append(projectList);
     container.append(projectContainer);
+
 
     function handleAddProject(name) {
         const li = document.createElement("li");
@@ -20,18 +24,16 @@ export default function PageLoad() {
         projectList.append(li);
     }
     const addProjectDialog = ProjectDialog(handleAddProject);
-
     const addProjectButton = document.createElement("button");
     addProjectButton.textContent = "Add Project";
     addProjectButton.addEventListener("click", () => {
         addProjectDialog.showModal();
     });
-
     projectContainer.append(addProjectDialog);
     projectContainer.append(addProjectButton);
 
 
-    scheduleMeetupButton.addEventListener('click', () => {
+    function handleScheduleMeetup() {
         const scheduleMeetUpButton = document.getElementById("schedule-meetup-button");
         scheduleMeetUpButton.remove();
 
@@ -39,9 +41,6 @@ export default function PageLoad() {
             event.preventDefault();
             const inputForNameValue = document.getElementById("meet-up-name-id").value;
             const inputForAgeValue = document.getElementById("meet-up-age-id").value;
-
-            // const nameDiv = document.createElement("div");
-            // const ageDiv = document.createElement("div");
 
             const details = document.createElement("details");
             const summary = document.createElement("summary");
@@ -54,21 +53,14 @@ export default function PageLoad() {
 
             const deleteMeetupButton = document.createElement("button");
             deleteMeetupButton.textContent = "Delete Meetup!";
-            // function handleEditDialog(name) {
-            //     // details.remove();
-            //     // const summary = document.createElement("summary");
-            //     const details = document.getElementById("details-div");
-            //     detailsDiv.remove();
-            //     const _detailsDiv = document.createElement("div");
-            //     _detailsDiv.textContent = name;
-            //     details.append(_detailsDiv, editButton);
-            // }
+ 
             deleteMeetupButton.addEventListener('click', () => {
                 details.remove();
             })
 
             function handleEditDialog(name) {
-                detailsDiv.textContent = name;  // update instead of removing
+                 //! update instead of removing
+                detailsDiv.textContent = name;
             }
             
 
@@ -80,24 +72,20 @@ export default function PageLoad() {
             editButton.addEventListener("click", () => {
                 editDialog.showModal();
             });
-            // projectContainer.append(editDialog); THIS IS WRONG!
+            //! projectContainer.append(editDialog);
             details.append(editDialog);
 
             details.append(deleteMeetupButton);
             
-
-            // nameDiv.textContent = inputForNameValue;
-            // ageDiv.textContent = inputForAgeValue;
             meetUpForm.remove();
 
-            // meetUpSection.append(nameDiv, ageDiv, scheduleMeetUpButton);
             meetUpSection.append(details, scheduleMeetUpButton);
         }
+
         const meetUpForm = MeetUpForm(handleSubmitMeetupForm);
         meetUpSection.appendChild(meetUpForm);
-    });
-
-
+    }
+    const scheduleMeetupButton = ScheduleMeetupButton(handleScheduleMeetup);
     meetUpSection.append(scheduleMeetupButton);
     container.append(meetUpSection);
 }

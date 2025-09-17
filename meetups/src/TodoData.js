@@ -3,17 +3,28 @@ const TodoData = (() => {
     {
       name: 'Project 1',
       todos: [
-        { title: 'Todo 1', description: 'Description 1', dueDate: '2025-09-18', priority: 'High' },
-        { title: 'Todo 2', description: 'Description 2', dueDate: '2025-09-19', priority: 'Medium' }
+        { name: 'Todo 1', age: 'Description 1' },
+        { name: 'Todo 2', age: 'Description 2' }
       ]
     },
     {
       name: 'Project 2',
       todos: [
-        { title: 'Todo 3', description: 'Description 3', dueDate: '2025-09-20', priority: 'Low' }
+        { name: 'Todo 3', age: 'Description 3'}
       ]
     }
   ];
+
+  function getProjectData(name) {
+    const projectData = projects.find(p => p.name === name);
+    return projectData;
+  } 
+
+  function getAllProjects() {
+    return projects;
+  }
+
+  return { getProjectData, getAllProjects }
 })
 
-export default TodoApp;
+export default TodoData;
