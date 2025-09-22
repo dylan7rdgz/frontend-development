@@ -92,6 +92,56 @@ modalCloseButton.addEventListener("click", () => {
   addBookDialog.close();
 });
 
+// const confirmBtn = document.getElementById("confirmBtn");
+
+// confirmBtn.addEventListener("click", (event) => {
+//   event.preventDefault();
+//   const title = document.getElementById("title");
+//   const author = document.getElementById("author");
+//   const numPages = document.getElementById("numPages");
+//   debugger;
+//   if (title.validity.tooLong) {
+//     validationMessage = "Title is too long";
+//   }
+// });
+
+const confirmBtn = document.getElementById("confirmBtn");
+const form = confirmBtn.closest("form");
+confirmBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (!form.checkValidity()) {
+    form.reportValidity(); // Shows built-in error messages and highlights invalid fields
+    return; // Prevent further actions if invalid
+  }
+  // Proceed with form submission logic here
+});
+
+
+
+
+const titleInput = document.getElementById("title");
+titleInput.setAttribute("maxlength", 10);
+titleInput.addEventListener("input", (event) => {
+  debugger;
+  if (titleInput.validity.tooShort) {
+    titleInput.setCustomValidity("Title is too short");
+    // titleInput.classList.add("invalid");
+  } else {
+    titleInput.setCustomValidity(""); // Clear the message
+  }
+  titleInput.reportValidity(); 
+});
+
+titleInput.addEventListener("input", (event) => {
+  debugger;
+  if (titleInput.validity.tooLong) {
+    titleInput.setCustomValidity("Title is too long");
+  } else {
+    titleInput.setCustomValidity(""); // Clear the message
+  }
+  titleInput.reportValidity(); 
+});
+
 
 
 

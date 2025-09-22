@@ -10,7 +10,7 @@
     <div id="currentSelection"></div>
     <table>
         <thead>
-            <th>Id</th> <!--it is better if the elements are created here or via javascript?-->
+            <th>Id</th> <!--is it better if the elements are created here or via javascript?-->
             <th>Title</th>
             <th>Author</th>
             <th>No. of Pages</th>
@@ -25,16 +25,15 @@
    
     <dialog id="add-book-dialog">
         <button id="close-book" autofocus>Close</button>
-        <p>This modal dialog has a groovy backdrop!</p>
-        <form action="/submit-form">
+        <form action="/submit-form" novalidate>
             <label for="title">Title: </label>
-            <input type="text" id="title"></input><br>
+            <input type="text" id="title" minlength="5"><br>
             <label for="author">Author: </label>
-            <input type="text" id="author"></input><br>
+            <input type="text" id="author"><br>
             <label for="numPages">No. of Pages: </label>
-            <input type="text" id="numPages"></input><br>
+            <input type="text" id="numPages"><br>
             <label for="readBook">Read Book: </label>
-            <input type="text" id="readBook"></input><br>
+            <input type="text" id="readBook"><br>
             <button value="cancel" formmethod="dialog">Cancel</button>
             <button id="confirmBtn" value="default">Confirm</button>
             </div>
