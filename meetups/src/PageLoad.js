@@ -4,20 +4,47 @@ import ProjectDialog from "./ProjectDialog";
 import EditDialog from "./EditDialog";
 import TodoData from "./TodoData";
 import generateList from "./generateList";
+import createMeetupItem from "./components/createMeetupItem";
+
 
 export default function PageLoad() {
     const container = document.getElementById("container");
     const meetUpSection = document.getElementById("meet-up-section");
 
+    // Project Section
     const projectContainer = document.createElement("div");
-    const { getAllProjects } = TodoData();
-    const projects = getAllProjects();
-    const projectNames = projects.map(project => project.name);
-    const projectList = generateList(projectNames);
+
+    const projectButtonsContainer = document.createElement("div");
+    const projects = TodoData().getAllProjects();
+    const projectNames = projects.map(p => p.name);
+
+    const projectTodosContainer = document.createElement("div");
+
+
+    function handleOpenProject(projectName) {
+        const project = projects.find(p => p.name === projectName);
+        if (!project) {
+            console.error(`Project ${projectName} not found`);
+            return;
+        }
+
+        // only clear todos container
+        projectTodosContainer.innerHTML = "";
+
+        const todosOfProjectElements = project.todos.map(todoObj => {
+            const todo = document.createElement("div");
+            todo.textContent = `${todoObj.name} ${todoObj.age}`;
+            return todo;
+        });
+
+        projectTodosContainer.append(...todosOfProjectElements);
+    }
+
+
+    const projectList = generateList(projectNames, handleOpenProject);
     projectContainer.append(projectList);
-    container.append(projectContainer);
 
-
+    // may need change
     function handleAddProject(name) {
         const li = document.createElement("li");
         li.textContent = name;
@@ -27,10 +54,14 @@ export default function PageLoad() {
     const addProjectButton = document.createElement("button");
     addProjectButton.textContent = "Add Project";
     addProjectButton.addEventListener("click", () => {
+        debugger;
         addProjectDialog.showModal();
     });
-    projectContainer.append(addProjectDialog);
-    projectContainer.append(addProjectButton);
+    // projectContainer.append(addProjectDialog);
+    // projectContainer.append(addProjectButton);
+    projectContainer.append(projectButtonsContainer, addProjectDialog, addProjectButton, projectTodosContainer);
+    container.append(projectContainer);
+
 
 
     function handleScheduleMeetup() {
@@ -39,52 +70,31 @@ export default function PageLoad() {
 
         const handleSubmitMeetupForm = (event) => {
             event.preventDefault();
-            const inputForNameValue = document.getElementById("meet-up-name-id").value;
-            const inputForAgeValue = document.getElementById("meet-up-age-id").value;
+            // item creation
+            const name = document.getElementById("meet-up-name-id").value;
+            const age = document.getElementById("meet-up-age-id").value;
 
-            const details = document.createElement("details");
-            const summary = document.createElement("summary");
+            const meetUpItem = createMeetupItem(
+                { name, age },
+                (detailsDiv) => {
+                    const editDialog = EditDialog((newValue) => {
+                        detailsDiv.textContent = newValue;
+                    });
+                    detailsDiv.parentElement.append(editDialog);
+                    editDialog.showModal();
+                },
+                (details) => details.remove()
+            );
 
-            summary.textContent = inputForNameValue;
-            const detailsDiv = document.createElement("div");
-            detailsDiv.textContent = inputForAgeValue;
-
-            const editButton = document.createElement("button");
-
-            const deleteMeetupButton = document.createElement("button");
-            deleteMeetupButton.textContent = "Delete Meetup!";
- 
-            deleteMeetupButton.addEventListener('click', () => {
-                details.remove();
-            })
-
-            function handleEditDialog(name) {
-                 //! update instead of removing
-                detailsDiv.textContent = name;
-            }
-            
-
-            const editDialog = EditDialog(handleEditDialog);
-
-            details.append(summary, detailsDiv, editButton);
-
-            editButton.textContent = "Edit Button";
-            editButton.addEventListener("click", () => {
-                editDialog.showModal();
-            });
-            //! projectContainer.append(editDialog);
-            details.append(editDialog);
-
-            details.append(deleteMeetupButton);
-            
             meetUpForm.remove();
-
-            meetUpSection.append(details, scheduleMeetUpButton);
+            meetUpSection.append(meetUpItem, scheduleMeetUpButton);
         }
 
         const meetUpForm = MeetUpForm(handleSubmitMeetupForm);
         meetUpSection.appendChild(meetUpForm);
     }
+
+    // Meetup Section
     const scheduleMeetupButton = ScheduleMeetupButton(handleScheduleMeetup);
     meetUpSection.append(scheduleMeetupButton);
     container.append(meetUpSection);
